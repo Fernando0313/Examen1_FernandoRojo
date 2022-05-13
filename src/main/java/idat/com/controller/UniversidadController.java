@@ -1,6 +1,7 @@
 package idat.com.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,53 +12,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import idat.com.dto.MallaDTORequest;
-import idat.com.dto.MallaDTOResponse;
-import idat.com.service.MallaService;
 
-
+import idat.com.model.Universidad;
+import idat.com.service.UniversidadService;
 
 @RestController
-@RequestMapping("/Malla/apiv1")
-public class MallaController {
+@RequestMapping("/universidad/api1")
+public class UniversidadController {
 	
 	@Autowired
-	private MallaService service;
+	private UniversidadService service;
 	
 	@RequestMapping(path = "/listar", method = RequestMethod.GET)
-	public ResponseEntity<List<MallaDTOResponse>> listarMalla(){
+	public ResponseEntity<List<Universidad>> listaruniversidad(){
 		
-		return new ResponseEntity<List<MallaDTOResponse>>(service.findAllMalla(), HttpStatus.CREATED);  
+		return new ResponseEntity<List<Universidad>>(service.findAllUniversidad(), HttpStatus.OK);  
 	}
 	
 	@RequestMapping(path = "/guardar", method = RequestMethod.POST)
-	public ResponseEntity<Void> guardar(@RequestBody MallaDTORequest malla){
+	public ResponseEntity<Void> guardar(@RequestBody Universidad universidad){
 		
 		
 		
-		service.saveMalla(malla);
+		service.saveUniversidad(universidad);
 		return  new ResponseEntity<Void>(HttpStatus.CREATED);
 		
 	}
 	
 	@RequestMapping(path = "/listar/{id}" , method = RequestMethod.GET)
-	public ResponseEntity<MallaDTOResponse> listarPorId(@PathVariable Integer id) {
+	public ResponseEntity<Optional<Universidad>> listarPorId(@PathVariable Integer id) {
 		
-		MallaDTOResponse p = service.findByIdMalla(id);
-		if(p != null)
-			return new ResponseEntity<MallaDTOResponse>(p, HttpStatus.OK);
+		Optional<Universidad> u = service.universidadFindById(id);
+		if(u != null)
+			return new ResponseEntity<Optional<Universidad>>(u, HttpStatus.OK);
 		
-		return new ResponseEntity<MallaDTOResponse>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<Optional<Universidad>>(HttpStatus.NOT_FOUND);
 		
 	}
 	
 	@RequestMapping(path = "/editar", method = RequestMethod.PUT)
-	public ResponseEntity<Void> editar(@RequestBody MallaDTORequest malla){
+	public ResponseEntity<Void> editar(@RequestBody Universidad universidad){
 		
-		MallaDTOResponse p = service.findByIdMalla(malla.getIdMallaDTO());
+		Optional<Universidad> u = service.universidadFindById(universidad.getIdUniversidad());
 
-		if(p != null) {
-			service.editMalla(malla);
+		if(u != null) {
+			service.editUniversidad(universidad);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 		
@@ -68,9 +67,9 @@ public class MallaController {
 	@RequestMapping(path = "/eliminar/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> eliminar(@PathVariable Integer id){
 		
-		MallaDTOResponse p = service.findByIdMalla(id);
-		if(p != null) {
-			service.deleteMalla(id);
+		Optional<Universidad> u = service.universidadFindById(id);
+		if(u != null) {
+			service.deleteUniversidad(id);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 		
@@ -80,4 +79,3 @@ public class MallaController {
 	}
 
 }
-

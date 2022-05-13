@@ -19,7 +19,7 @@ public class CursoServiceImpl implements CursoService {
 	public CursoRepository repositorio;
 
 	@Override
-	public void guardarCurso(CursoDTORequest curso) {
+	public void saveCurso(CursoDTORequest curso) {
 		Curso c = new Curso();
 		c.setCurso(curso.getCursoDTO());
 		c.setDescripcion(curso.getDescripcionDTO());
@@ -28,7 +28,7 @@ public class CursoServiceImpl implements CursoService {
 	}
 
 	@Override
-	public void editarCurso(CursoDTORequest curso) {
+	public void editCurso(CursoDTORequest curso) {
 		Curso c = new Curso();
 		c.setCurso(curso.getCursoDTO());
 		c.setDescripcion(curso.getDescripcionDTO());
@@ -38,13 +38,13 @@ public class CursoServiceImpl implements CursoService {
 	}
 
 	@Override
-	public void eliminarCurso(Integer id) {
+	public void deleteCurso(Integer id) {
 		repositorio.deleteById(id);
 		
 	}
 
 	@Override
-	public List<CursoDTOResponse> listarCursos() {
+	public List<CursoDTOResponse> findAllCursos() {
 		List<CursoDTOResponse> lista = new ArrayList<CursoDTOResponse>();
 		CursoDTOResponse c = null;
 		
@@ -63,7 +63,7 @@ public class CursoServiceImpl implements CursoService {
 	}
 
 	@Override
-	public CursoDTOResponse obtenerCursoId(Integer id) {
+	public CursoDTOResponse  CursoFindById(Integer id) {
 
 		Curso curso = repositorio.findById(id).orElse(null);
 		CursoDTOResponse c = new CursoDTOResponse();

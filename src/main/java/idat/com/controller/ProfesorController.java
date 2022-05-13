@@ -22,12 +22,12 @@ import idat.com.service.ProfesorService;
 public class ProfesorController {
 	
 	@Autowired
-	private ProfesorService servicio;
+	private ProfesorService service;
 	
 	@RequestMapping(path = "/listar", method = RequestMethod.GET)
 	public ResponseEntity<List<ProfesorDTOResponse>> listarProfesor(){
 		
-		return new ResponseEntity<List<ProfesorDTOResponse>>(servicio.listarProfesor(), HttpStatus.CREATED);  
+		return new ResponseEntity<List<ProfesorDTOResponse>>(service.findAllProfesor(), HttpStatus.CREATED);  
 	}
 	
 	@RequestMapping(path = "/guardar", method = RequestMethod.POST)
@@ -35,7 +35,7 @@ public class ProfesorController {
 		
 		
 		
-		servicio.guardarProfesor(profesor);
+		service.saveProfesor(profesor);
 		return  new ResponseEntity<Void>(HttpStatus.CREATED);
 		
 	}
@@ -43,7 +43,7 @@ public class ProfesorController {
 	@RequestMapping(path = "/listar/{id}" , method = RequestMethod.GET)
 	public ResponseEntity<ProfesorDTOResponse> listarPorId(@PathVariable Integer id) {
 		
-		ProfesorDTOResponse p = servicio.obtenerProfesorId(id);
+		ProfesorDTOResponse p = service.findByIdProfesor(id);
 		if(p != null)
 			return new ResponseEntity<ProfesorDTOResponse>(p, HttpStatus.OK);
 		
@@ -54,10 +54,10 @@ public class ProfesorController {
 	@RequestMapping(path = "/editar", method = RequestMethod.PUT)
 	public ResponseEntity<Void> editar(@RequestBody ProfesorDTORequest profesor){
 		
-		ProfesorDTOResponse p = servicio.obtenerProfesorId(profesor.getIdProfesorDTO());
+		ProfesorDTOResponse p = service.findByIdProfesor(profesor.getIdProfesorDTO());
 
 		if(p != null) {
-			servicio.editarProfesor(profesor);
+			service.editProfesor(profesor);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 		
@@ -68,9 +68,9 @@ public class ProfesorController {
 	@RequestMapping(path = "/eliminar/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> eliminar(@PathVariable Integer id){
 		
-		ProfesorDTOResponse p = servicio.obtenerProfesorId(id);
+		ProfesorDTOResponse p = service.findByIdProfesor(id);
 		if(p != null) {
-			servicio.eliminarProfesor(id);
+			service.deleteProfesor(id);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 		

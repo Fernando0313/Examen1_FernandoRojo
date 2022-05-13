@@ -1,5 +1,7 @@
 package idat.com.dto;
 
+import idat.com.model.Universidad;
+
 public class MallaDTORequest {
 
 	private Integer idMallaDTO;

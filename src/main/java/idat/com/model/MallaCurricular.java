@@ -29,7 +29,9 @@ public class MallaCurricular {
 	@ManyToOne
 	private Curso cursos;
 	
-	@OneToOne(mappedBy = "malla")
+	@OneToOne
+	@JoinColumn(name="id_universidad", nullable = false, unique = true,
+	foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_universidad) references universidad (id_universidad)"))
 	private Universidad universidad;
 	
 	

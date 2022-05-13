@@ -8,12 +8,12 @@ import idat.com.dto.ProfesorDTOResponse;
 
 
 public interface ProfesorService {
-	public void guardarProfesor(ProfesorDTORequest profesor);
-	public void editarProfesor(ProfesorDTORequest profesor);
+	public void saveProfesor(ProfesorDTORequest profesor);
+	public void editProfesor(ProfesorDTORequest profesor);
 	
-	public void eliminarProfesor(Integer id);
+	public void deleteProfesor(Integer id);
 	
-	public List<ProfesorDTOResponse> listarProfesor();
-	public ProfesorDTOResponse obtenerProfesorId(Integer id);
+	public List<ProfesorDTOResponse> findAllProfesor();
+	public ProfesorDTOResponse findByIdProfesor(Integer id);
 
 }

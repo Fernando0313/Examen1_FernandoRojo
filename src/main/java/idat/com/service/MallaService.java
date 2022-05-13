@@ -8,12 +8,12 @@ import idat.com.dto.MallaDTOResponse;
 
 public interface MallaService {
 	
-	public void guardarMalla(MallaDTORequest malla);
-	public void editarMalla(MallaDTORequest malla);
+	public void saveMalla(MallaDTORequest malla);
+	public void editMalla(MallaDTORequest malla);
 	
-	public void eliminarMalla(Integer id);
+	public void deleteMalla(Integer id);
 	
-	public List<MallaDTOResponse> listarMalla();
-	public MallaDTOResponse obtenerMallaId(Integer id);
+	public List<MallaDTOResponse> findAllMalla();
+	public MallaDTOResponse findByIdMalla(Integer id);
 
 }

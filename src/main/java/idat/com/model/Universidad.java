@@ -21,10 +21,8 @@ public class Universidad {
 	private Integer idUniversidad;
 	private String Universidad;
 	
-	@OneToOne
-	@JoinColumn(name="id_malla", nullable = false, unique = true,
-	foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_malla) references malla_curricular (id_malla)"))
-	private MallaCurricular malla;
+	@OneToOne(mappedBy = "universidad")
+	private MallaCurricular mallaCurricular;
 	
 	public Integer getIdUniversidad() {
 		return idUniversidad;

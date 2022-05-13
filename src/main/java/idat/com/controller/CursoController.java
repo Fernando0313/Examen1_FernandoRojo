@@ -21,12 +21,12 @@ import idat.com.service.CursoService;
 public class CursoController {
 
 	@Autowired
-	private CursoService servicio;
+	private CursoService service;
 	
 	@RequestMapping(path = "/listar", method = RequestMethod.GET)
 	public ResponseEntity<List<CursoDTOResponse>> listarCurso(){
 		
-		return new ResponseEntity<List<CursoDTOResponse>>(servicio.listarCursos(), HttpStatus.CREATED);  
+		return new ResponseEntity<List<CursoDTOResponse>>(service.findAllCursos(), HttpStatus.CREATED);  
 	}
 	
 	@RequestMapping(path = "/guardar", method = RequestMethod.POST)
@@ -34,7 +34,7 @@ public class CursoController {
 		
 		
 		
-		servicio.guardarCurso(curso);
+		service.saveCurso(curso);
 		return  new ResponseEntity<Void>(HttpStatus.CREATED);
 		
 	}
@@ -42,7 +42,7 @@ public class CursoController {
 	@RequestMapping(path = "/listar/{id}" , method = RequestMethod.GET)
 	public ResponseEntity<CursoDTOResponse> listarPorId(@PathVariable Integer id) {
 		
-		CursoDTOResponse p = servicio.obtenerCursoId(id);
+		CursoDTOResponse p = service.CursoFindById(id);
 		if(p != null)
 			return new ResponseEntity<CursoDTOResponse>(p, HttpStatus.OK);
 		
@@ -53,10 +53,10 @@ public class CursoController {
 	@RequestMapping(path = "/editar", method = RequestMethod.PUT)
 	public ResponseEntity<Void> editar(@RequestBody CursoDTORequest curso){
 		
-		CursoDTOResponse p = servicio.obtenerCursoId(curso.getIdCursoDTO());
+		CursoDTOResponse p = service.CursoFindById(curso.getIdCursoDTO());
 
 		if(p != null) {
-			servicio.editarCurso(curso);
+			service.editCurso(curso);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 		
@@ -67,9 +67,9 @@ public class CursoController {
 	@RequestMapping(path = "/eliminar/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> eliminar(@PathVariable Integer id){
 		
-		CursoDTOResponse p = servicio.obtenerCursoId(id);
+		CursoDTOResponse p = service.CursoFindById(id);
 		if(p != null) {
-			servicio.eliminarCurso(id);
+			service.deleteCurso(id);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 		

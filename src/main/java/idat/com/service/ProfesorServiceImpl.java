@@ -19,7 +19,7 @@ public class ProfesorServiceImpl implements ProfesorService{
 	public ProfesorRepository repositorio;
 	
 	@Override
-	public void guardarProfesor(ProfesorDTORequest profesor) {
+	public void saveProfesor(ProfesorDTORequest profesor) {
 		Profesor p = new Profesor();
 		p.setIdProfesor(profesor.getIdProfesorDTO());
 		p.setProfesor(profesor.getProfesorDTO());
@@ -28,7 +28,7 @@ public class ProfesorServiceImpl implements ProfesorService{
 	}
 
 	@Override
-	public void editarProfesor(ProfesorDTORequest profesor) {
+	public void editProfesor(ProfesorDTORequest profesor) {
 		Profesor p = new Profesor();
 		p.setIdProfesor(profesor.getIdProfesorDTO());
 		p.setProfesor(profesor.getProfesorDTO());
@@ -37,13 +37,13 @@ public class ProfesorServiceImpl implements ProfesorService{
 	}
 
 	@Override
-	public void eliminarProfesor(Integer id) {
+	public void deleteProfesor(Integer id) {
 		repositorio.deleteById(id);
 		
 	}
 
 	@Override
-	public List<ProfesorDTOResponse> listarProfesor() {
+	public List<ProfesorDTOResponse> findAllProfesor() {
 		List<ProfesorDTOResponse> lista = new ArrayList<ProfesorDTOResponse>();
 		ProfesorDTOResponse p = null;
 		
@@ -57,7 +57,7 @@ public class ProfesorServiceImpl implements ProfesorService{
 	}
 
 	@Override
-	public ProfesorDTOResponse obtenerProfesorId(Integer id) {
+	public ProfesorDTOResponse findByIdProfesor(Integer id) {
 		Profesor profesor = repositorio.findById(id).orElse(null);
 		ProfesorDTOResponse p = new ProfesorDTOResponse();
 		p.setIdProfesorDTO(profesor.getIdProfesor());

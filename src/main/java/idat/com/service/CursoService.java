@@ -9,11 +9,11 @@ import idat.com.dto.CursoDTOResponse;
 
 public interface CursoService {
 
-	public void guardarCurso(CursoDTORequest curso);
-	public void editarCurso(CursoDTORequest curso);
+	public void saveCurso(CursoDTORequest curso);
+	public void editCurso(CursoDTORequest curso);
 	
-	public void eliminarCurso(Integer id);
+	public void deleteCurso(Integer id);
 	
-	public List<CursoDTOResponse> listarCursos();
-	public CursoDTOResponse obtenerCursoId(Integer id);
+	public List<CursoDTOResponse> findAllCursos();
+	public CursoDTOResponse CursoFindById(Integer id);
 }

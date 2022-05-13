@@ -19,17 +19,18 @@ public class MallaServiceImpl implements MallaService {
 	public MallaRepository repositorio;
 
 	@Override
-	public void guardarMalla(MallaDTORequest malla) {
+	public void saveMalla(MallaDTORequest malla) {
 
 	       MallaCurricular m = new MallaCurricular();
 			m.setIdMalla(malla.getIdMallaDTO());
 			m.setAnio(malla.getAnioDTO());
+			
 			repositorio.save(m);
 		
 	}
 
 	@Override
-	public void editarMalla(MallaDTORequest malla) {
+	public void editMalla(MallaDTORequest malla) {
 		MallaCurricular m = new MallaCurricular();
 m.setIdMalla(malla.getIdMallaDTO());
 m.setAnio(malla.getAnioDTO());
@@ -38,13 +39,13 @@ repositorio.saveAndFlush(m);
 	}
 
 	@Override
-	public void eliminarMalla(Integer id) {
+	public void deleteMalla(Integer id) {
 		 repositorio.deleteById(id);
 		
 	}
 
 	@Override
-	public List<MallaDTOResponse> listarMalla() {
+	public List<MallaDTOResponse> findAllMalla() {
 		List<MallaDTOResponse> lista = new ArrayList<MallaDTOResponse>();
 		MallaDTOResponse m = null;
 		
@@ -62,7 +63,7 @@ repositorio.saveAndFlush(m);
 	
 
 	@Override
-	public MallaDTOResponse obtenerMallaId(Integer id) {
+	public MallaDTOResponse findByIdMalla(Integer id) {
 		
 		MallaCurricular malla = repositorio.findById(id).orElse(null);
 		MallaDTOResponse m = new MallaDTOResponse();
